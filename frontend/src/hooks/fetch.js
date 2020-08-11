@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 
+import { sitesIpv4, sitesIpv6 } from '../data/sites';
+
 const useFetch = () => {
   const [data, setData] = useState();
-  const [url, setUrl] = useState('https://api.ipify.org');
+  const [url, setUrl] = useState(sitesIpv4[0]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -15,6 +17,7 @@ const useFetch = () => {
         const response = await fetch(url).then(res => res.text());
         setData(response);
       } catch (error) {
+        console.log(error);
         setIsError(true);
       }
 
