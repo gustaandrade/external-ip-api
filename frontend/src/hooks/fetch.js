@@ -14,8 +14,12 @@ const useFetch = () => {
       setIsLoading(true);
 
       try {
-        const response = await fetch(url).then(res => res.text());
-        setData(response);
+        await Promise.all(
+          sitesIpv4.map(async s => {
+            const response = await fetch(s).then(res => res.text());
+            setData(response);
+          })
+        );
       } catch (error) {
         console.log(error);
         setIsError(true);

@@ -7,9 +7,6 @@ export const sitesIpv4 = [
 
 export const sitesIpv6 = [
   'https://api64.ipify.org/',
-  'https://icanhazip.com/',
-  'https://v6.ident.me/',
-  'https://tnx.nl/ip',
-  'http://diagnostic.opendns.com/myip',
-  'http://trackip.net/ip'
+  'https://ipv6.icanhazip.com/',
+  'https://v6.ident.me/'
 ];
