@@ -4,9 +4,11 @@ import { sitesIpv4, sitesIpv6 } from '../data/sites';
 
 const useFetch = () => {
   const [data, setData] = useState();
-  const [url, setUrl] = useState(sitesIpv4[0]);
+  const [isIpv6, setIsIpv6] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+
+  const sites = !isIpv6 ? sitesIpv4 : sitesIpv6;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -14,14 +16,14 @@ const useFetch = () => {
       setIsLoading(true);
 
       try {
-        await Promise.all(
-          sitesIpv4.map(async s => {
-            const response = await fetch(s).then(res => res.text());
+        for (const s of sites) {
+          const response = await fetch(s).then(res => res.text());
+          if (typeof response !== 'undefined' && response !== null) {
             setData(response);
-          })
-        );
+            break;
+          }
+        }
       } catch (error) {
-        console.log(error);
         setIsError(true);
       }
 
@@ -29,9 +31,9 @@ const useFetch = () => {
     };
 
     fetchData();
-  }, [url]);
+  }, [isIpv6, sites]);
 
-  return [{ data, isLoading, isError }, setUrl];
+  return [{ data, isLoading, isError }, setIsIpv6];
 };
 
 export default useFetch;

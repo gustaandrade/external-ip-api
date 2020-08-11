@@ -1,11 +1,9 @@
 import React from 'react';
 
-import useFetch from './hooks/fetch';
+import Routes from './routes';
 
 function App() {
-  const [{ data, isLoading, isError }] = useFetch();
-
-  return !isLoading && !isError && <pre>{data}</pre>;
+  return <Routes />;
 }
 
 export default App;
