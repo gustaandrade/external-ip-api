@@ -4,13 +4,15 @@ module.exports = {
   async index(req, res) {
     extIP.get().then(
       ip => {
-        return res.status(200).json({
+        res.statusCode = 200;
+        return res.json({
           ip: ip
         });
       },
       err => {
-        return res.status(404).json({
-          error: ''
+        res.statusCode = 404;
+        return res.json({
+          error: err
         });
       }
     );
