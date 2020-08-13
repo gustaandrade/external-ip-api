@@ -1,21 +1,20 @@
-let extIP = require("ext-ip")();
+let extIP = require('ext-ip')();
 
 module.exports = {
   async index(req, res) {
-    const obj = {
-      ip: ""
-    };
-
     extIP.get().then(
       ip => {
-        console.log(ip);
-        obj.ip = ip;
+        return res.status(200).json({
+          ip: ip
+        });
       },
       err => {
-        console.error(err);
+        return res.status(404).json({
+          error: ''
+        });
       }
     );
 
-    return res.json(obj);
+    return res.status(200);
   }
 };
